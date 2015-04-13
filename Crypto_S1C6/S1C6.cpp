@@ -1,34 +1,19 @@
 #include <iostream>
 #include <vector>
-#include <fstream>
 #include <string>
-#include <assert.h>
 #include "Symbols.h"
 #include "Base64.h"
 #include "XorSolver.h"
+#include "FileHelper.h"
 
 using namespace std;
-
-string getFileContents() {
-	string result;
-	string str;
-
-	ifstream fIn("6.txt");
-	assert (fIn != NULL);
-	while (fIn >> str) {
-		result += str;
-	}
-	fIn.close();
-
-	return result;
-}
 
 const int MIN_KEYSIZE = 2;
 const int MAX_KEYSIZE = 40;
 const int TRY_DIFFERENT_KEYSIZES = 3;
 
 int main() {
-	string input = getFileContents();
+	string input = FileHelper::inputFromFile("6.txt");
 	vector<byte> inputRaw = Base64::fromBase64(input);
 
 	vector<string> decryptedMessages = XorSolver::crackXorEncryptedMessage(inputRaw, MIN_KEYSIZE, MAX_KEYSIZE, TRY_DIFFERENT_KEYSIZES);

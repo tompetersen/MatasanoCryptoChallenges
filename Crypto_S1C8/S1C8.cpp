@@ -1,27 +1,12 @@
 #include <iostream>
-#include <fstream>
 #include <string.h>
 #include "Raw.h"
-#include "assert.h"
+#include "FileHelper.h"
 
 using namespace std;
 
-vector< vector<byte> > getFileInput() {
-	vector< vector<byte> > result;
-	string str;
-
-	ifstream fIn("8.txt");
-	assert(fIn != NULL);
-	while(getline(fIn, str)) {
-		result.push_back(Raw::hexStringToRaw(str));
-	}
-	fIn.close();
-
-	return result;
-}
-
 int main() {
-	vector< vector<byte> > input = getFileInput();
+	vector< vector<byte> > input = FileHelper::linewiseRawInputFromHexFile("8.txt");
 
 	//for each line search for equal 16 byte blocks
 	int lineNumber = 0;

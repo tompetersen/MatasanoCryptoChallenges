@@ -8,8 +8,11 @@
 #ifndef AESCIPHER_H_
 #define AESCIPHER_H_
 
-
-
-
+class AesCipher {
+public:
+	int decrypt(unsigned char *ciphertext, int ciphertext_len, unsigned char *key, unsigned char *plaintext);
+	AesCipher();
+	~AesCipher();
+};
 
 #endif /* AESCIPHER_H_ */
